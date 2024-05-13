@@ -1,5 +1,5 @@
 # jsonviz
-
+[![asciicast](https://asciinema.org/a/siC4wKCcVJUEEHhmirrVqJksZ.svg)](https://asciinema.org/a/siC4wKCcVJUEEHhmirrVqJksZ)
 `jsonviz` is a command-line tool built in Go that visualizes JSON file structures in a navigable tree format using the `termui` library. This tool is designed to help developers and data scientists quickly understand and explore the structure of complex JSON data from the terminal.
 
 ## Features
