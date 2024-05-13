@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '^1.21'
+
+      - name: Build binaries for all platforms
+        run: |
+          GOOS=windows GOARCH=amd64 go build -o jsonviz-windows-amd64.exe
+          GOOS=linux GOARCH=amd64 go build -o jsonviz-linux-amd64
+          GOOS=darwin GOARCH=amd64 go build -o jsonviz-darwin-amd64
+
+      - name: Upload releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            jsonviz-windows-amd64.exe
+            jsonviz-linux-amd64
+            jsonviz-darwin-amd64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
